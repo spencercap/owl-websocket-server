@@ -7,4 +7,4 @@
 `node index.js`
 
 ## test client
-open or serve `/test/index.html`
+open or serve `/test/index.html` and check console log for connection status
