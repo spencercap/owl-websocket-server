@@ -1,4 +1,5 @@
 # owl-websocket-server
+simple websocket server built on node.js for mbient orientation sensor 
 
 ## install
 `npm i`
