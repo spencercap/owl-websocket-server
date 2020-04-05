@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owl Websocket Client Text</title>
+</head>
+<body>
+    <p>hello world, check logs</p>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded and parsed');
+
+            let socket;
+            socket = new WebSocket('ws://192.168.1.16:9000');
+
+            // Connection opened
+            socket.addEventListener('open', function (event) {
+                console.log('connected to server');
+                socket.send('hello from client');
+            });
+
+            // Messages from server
+            socket.addEventListener('message', function (event) {
+                console.log('got message from server');
+                console.log(event.data);
+            });
+
+            // errors
+            socket.addEventListener('error', function (event) {
+                console.log('error from server');
+                console.log(event);
+                socket.close();
+            });
+        });
+    </script>
+</body>
+</html>
