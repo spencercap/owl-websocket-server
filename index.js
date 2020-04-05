@@ -16,15 +16,27 @@ app.get('/', function (req, res) {
 // ~~~ Websocket ~~~~
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(data) {
-        console.log('got message from client:');
-        console.log(data);
+        // console.log('got message from client:');
+        // console.log(data);
 
-        // re-broadcast incoming data
-        // wss.clients.forEach(function each(client) {
-        //     if (client !== ws && client.readyState === WebSocket.OPEN) {
-        //         client.send(data);
-        //     }
-        // });
+        const parts = data.split('/');
+        if (parts[0] == 'quat') {
+            const x = parts[1],
+                y = parts[2],
+                z = parts[3],
+                w = parts[4];
+            console.debug(x, y, z, w);
+
+            // re-broadcast incoming data to other clients
+            wss.clients.forEach(function each(client) {
+                if (client !== ws) {
+                    client.send(data);
+                }
+            });
+
+        }
+
+
 
     });
 
